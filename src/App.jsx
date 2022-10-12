@@ -41,11 +41,12 @@ function App() {
   const handleChange = event => {
     if (event.target.value === '') {
       setsuggestedList()
+    } else {
+      const URL = `https://rickandmortyapi.com/api/location?name=${event.target.value}`
+      axios.get(URL)
+        .then(res => setsuggestedList(res.data.results))
+        .catch(err => console.log(err))
     }
-    const URL = `https://rickandmortyapi.com/api/location?name=${event.target.value}`
-    axios.get(URL)
-      .then(res => setsuggestedList(res.data.results))
-      .catch(err => console.log(err))
   }
 
 
